@@ -7,25 +7,21 @@ def load_data(filepath):
 
 
 def get_biggest_bar(data):
-    number_of_bars = len(data)
-    maximum_seats = data[0]['Cells']['SeatsCount']
-    while number_of_bars != 0:
-        number_of_bars = number_of_bars - 1
-        if data[number_of_bars]['Cells']['SeatsCount'] > maximum_seats:
-            maximum_seats = data[number_of_bars]['Cells']['SeatsCount']
-            biggest_bar_name = data[number_of_bars]['Cells']['Name']
-    return biggest_bar_name
+    seats_count_all_bars = [data[i]['Cells']['SeatsCount'] for i in range(len(data))]
+    maximum_seats = max(seats_count_all_bars)
+    for bar in data:
+        if bar['Cells']['SeatsCount'] == maximum_seats:
+            biggest_bar_name = bar['Cells']['Name']
+            return biggest_bar_name
 
 
 def get_smallest_bar(data):
-    number_of_bars = len(data)
-    minimum_seats = data[0]['Cells']['SeatsCount']
-    while number_of_bars != 0:
-        number_of_bars = number_of_bars - 1
-        if data[number_of_bars]['Cells']['SeatsCount'] < minimum_seats:
-            minimum_seats = data[number_of_bars]['Cells']['SeatsCount']
-            smallest_bar_name = data[number_of_bars]['Cells']['Name']
-    return smallest_bar_name
+    seats_count_all_bars = [data[i]['Cells']['SeatsCount'] for i in range(len(data))]
+    minimun_seats = min(seats_count_all_bars)
+    for bar in data:
+        if bar['Cells']['SeatsCount'] == minimun_seats :
+            smallest_bar_name = bar['Cells']['Name']
+            return smallest_bar_name
 
 
 def get_closest_bar(data, longitude, latitude):
@@ -43,8 +39,8 @@ def get_closest_bar(data, longitude, latitude):
 
 if __name__ == '__main__':
     data = (load_data(input('Введите путь до файла: ')))
-    print('Самый большой бар: ' + get_biggest_bar(data))
-    print('Самый маленький бар: ' + get_smallest_bar(data))
+    print('Самый большой бар: {}' .format(get_biggest_bar(data)))
+    print('Самый маленький бар: {}' .format(get_smallest_bar(data)))
     longitude = float(input('Введите долготу: '))
     latitude = float(input('Введите широту: '))
-    print('Самый близкий бар: ' + get_closest_bar(data, longitude, latitude))
+    print('Самый близкий бар: {}' .format(get_closest_bar(data, longitude, latitude)))
