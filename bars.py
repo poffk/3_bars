@@ -7,21 +7,13 @@ def load_data(filepath):
 
 
 def get_biggest_bar(data):
-    seats_count_all_bars = [data[i]['Cells']['SeatsCount'] for i in range(len(data))]
-    maximum_seats = max(seats_count_all_bars)
-    for bar in data:
-        if bar['Cells']['SeatsCount'] == maximum_seats:
-            biggest_bar_name = bar['Cells']['Name']
-            return biggest_bar_name
+    maximum_seats = max(data, key=lambda x: x['Cells']['SeatsCount'])
+    return maximum_seats['Cells']['Name']
 
 
 def get_smallest_bar(data):
-    seats_count_all_bars = [data[i]['Cells']['SeatsCount'] for i in range(len(data))]
-    minimun_seats = min(seats_count_all_bars)
-    for bar in data:
-        if bar['Cells']['SeatsCount'] == minimun_seats :
-            smallest_bar_name = bar['Cells']['Name']
-            return smallest_bar_name
+    minimun_seats = min(data, key=lambda x: x['Cells']['SeatsCount'])
+    return minimun_seats['Cells']['Name']
 
 
 def get_closest_bar(data, longitude, latitude):
